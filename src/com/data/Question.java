@@ -1,82 +1,111 @@
-/*
- * Copyright (c) 2018.  Written by Andrey Grabarnick Email: Reist2009@gmail.com
- */
-
 package com.data;
+
 
 import java.io.Serializable;
 import java.util.Arrays;
 
 public class Question implements Serializable {
     /**
-	 * default serial ID
-	 */
-	private static final long serialVersionUID = 1L;
-	//Entity Class for single QuestionListFragment.Data.Question
-    private String _QID;
-    private int _teacherID;
-    private String _questionText;
-    private String[] _ans;
-    private int _correct;
+     * Question fields
+     */
+    private int QID;
+    private String questionText;
+    private String possibleAnswers[];
+    private int correctAnswer;
+    private Subject subject;
+    private Teacher author;
 
-    public Question(String _QID, int _teacherID, String _questionText, String[] _ans, int correct) {
-        this._QID = _QID;
-        this._teacherID = _teacherID;
-        this._questionText = _questionText;
-        this._ans = _ans;
-        this._correct = correct;
+    /*
+     * Question constructor
+     */
+    public Question(String questionText, String[] possibleAnswers, int correctAnswer, Subject questionSubject, Teacher teacherID) {
+        this.questionText = questionText;
+        this.correctAnswer = correctAnswer;
+        this.subject = questionSubject;
+        this.author = teacherID;
+        this.possibleAnswers = possibleAnswers;
     }
 
-    //Getters & Setters-------------------------------------------------------------------------------------------------
-    public String get_QID() {
-        return _QID;
+    /**
+     * @param QID
+     * @param subjectId
+     */
+    public Question(int QID, Subject subjectId) {
+        this.QID = QID;
+        this.subject = subjectId;
     }
 
-    public void set_QID(String _QID) {
-        this._QID = _QID;
+    /*
+     * Question getters and setters
+     */
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public int get_teacherID() {
-        return _teacherID;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public void set_teacherID(int _teacherID) {
-        this._teacherID = _teacherID;
+    public int getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public String get_questionText() {
-        return _questionText;
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 
-    public void set_questionText(String _questionText) {
-        this._questionText = _questionText;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public String[] get_ans() {
-        return _ans;
+    public void setSubject(Subject subjectId) {
+        this.subject = subjectId;
     }
 
-    public void set_ans(String[] _ans) {
-        this._ans = _ans;
+    public Teacher getAuthor() {
+        return author;
     }
 
-    public int get_correct() {
-        return _correct;
+    public void setAuthor(Teacher teacher) {
+        this.author = teacher;
     }
 
-    public void set_correct(int correct) {
-        this._correct = correct;
+    public String[] getPossibleAnswers() {
+        return possibleAnswers;
     }
-    //Getters & Setters-END---------------------------------------------------------------------------------------------
+
+    public void setPossibleAnswers(String[] possibleAnswers) {
+        this.possibleAnswers = possibleAnswers;
+    }
+
+    public String getAns(int index) {
+        return this.possibleAnswers[index];
+    }
+
+    public int getQID() {
+        return QID;
+    }
+
+    public String getQIDString() {
+        if (subject != null)
+            return String.format("%02d", getSubject().getSubjectID()) + String.format("%03d", QID);
+        return "00000";
+    }
+
+    public void setQID(int QID) {
+        this.QID = QID;
+    }
 
     @Override
     public String toString() {
-        return "\n-------\n" +
-                "_QID= " + _QID + '\n' +
-                ", _teacherID= " + _teacherID + '\n' +
-                ", _questionText= " + _questionText + '\n' +
-                ", _ans=" + Arrays.toString(_ans) +'\n'+
-                ", _correct=" + _correct +'\n'+
+        return "Question{" +
+                "QID=" + String.format("%03d", QID) +
+                ", questionText='" + questionText + '\'' +
+                ", possibleAnswers=" + Arrays.toString(possibleAnswers) +
+                ", correctAnswer=" + correctAnswer +
+                ", subject=" + subject +
+                ", author='" + author + '\'' +
                 '}';
     }
 }
+

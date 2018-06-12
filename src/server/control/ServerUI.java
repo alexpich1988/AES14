@@ -1,9 +1,15 @@
 package server.control;
 
+
+/**
+ * Interface for logging messages from server system.
+ */
 public interface ServerUI {
+
     /**
      * Method that when overriden is used to display Error messages onto
      * a UI.
      */
-    public abstract void logMsg(String str);
+    void logMsg(String str);
+
 }

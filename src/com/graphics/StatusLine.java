@@ -1,10 +1,7 @@
 package com.graphics;
 
 
-
-
 import com.Contract;
-import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -25,13 +22,12 @@ public class StatusLine extends LineChart<Number,Number> {
         this.getData().add(series);
         this.getStylesheets().add(this.getClass().getResource(Contract.css).toExternalForm());
         this.setCreateSymbols(false);
-        this.setAnimated(false);
+        //this.setAnimated(false);
         this.getXAxis().setTickLabelsVisible(false);
         this.getXAxis().setOpacity(0);
         this.setLegendVisible(false);
         this.setVerticalZeroLineVisible(false);
         this.setVerticalGridLinesVisible(false);
-
         //init dummy data
         for (int i = 0; i < MAX_NUM; i++) {
             series.getData().add(new XYChart.Data(i, baseLine));
@@ -58,6 +54,7 @@ public class StatusLine extends LineChart<Number,Number> {
                 (XYChart.Data<Number, Number>) series.getData().get(numOfPoint - 1);
         lastData.setYValue(newValue);
     }
+
 
 
 }
